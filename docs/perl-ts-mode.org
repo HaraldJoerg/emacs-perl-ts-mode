@@ -1,0 +1,31 @@
+#+TITLE: A Major Mode for Perl using tree-sitter
+#+SUBTITLE: Developer Notes
+#+AUTHOR: Harald Jörg
+#+EMAIL: <haj@posteo.de>
+
+* References
+
+** Perl parser repositories
+The branch =release= contains the files scanner.c and parser.c needed
+to compile the dynamic libraries:
+ - https://github.com/tree-sitter-perl/tree-sitter-perl
+ - https://github.com/HaraldJoerg/tree-sitter-pod
+   (forked from tree-sitter-perl because they don't have a =release=
+   with parser.c yet)
+
+** Emacs (Elisp) Manual     
+ - The info node: [[info:elisp#Parsing Program Source][elisp#Parsing Program Source]],
+ - in particular [[info:elisp#Tree-sitter Major Modes][Developing major modes with tree-sitter]]
+
+* Developer hacks
+
+If you change the default value in a =defvar= form, then re-evaluating
+this form has no effect.  The following block clears some =defvar=
+values and then re-evaluates =perl-ts-mode.el= so that the _current_
+default values are applied again.
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (makunbound 'perl-ts--font-lock-settings)
+  (eval-buffer "perl-ts-mode.el")
+#+END_SRC
+
