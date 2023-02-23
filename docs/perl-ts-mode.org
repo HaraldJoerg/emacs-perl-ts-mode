@@ -19,13 +19,43 @@ to compile the dynamic libraries:
 
 * Developer hacks
 
-If you change the default value in a =defvar= form, then re-evaluating
-this form has no effect.  The following block clears some =defvar=
-values and then re-evaluates =perl-ts-mode.el= so that the _current_
-default values are applied again.
+This is not to go into any public release: These are tools and notes I
+use while hacking on this.  When I'm using development versions of
+Emacs, I keep my own customizing out of the way.
 
+** Define some functions
 #+BEGIN_SRC emacs-lisp :results silent
-  (makunbound 'perl-ts--font-lock-settings)
-  (eval-buffer "perl-ts-mode.el")
+  (require 'treesit)
+  (setq treesit-language-source-alist 
+	'((perl . ("https://github.com/tree-sitter-perl/tree-sitter-perl"
+		   "release"))
+	  (pod . ("https://github.com/HaraldJoerg/tree-sitter-pod"
+		  "release"))))
+
+  (defun my/pull-perl-grammar ()
+    "Pull a new Perl grammar from GitHub and install it."
+    (interactive)
+    (treesit-install-language-grammar 'perl))
+
+  (defun my/pull-pod-grammar ()
+    "Pull a new POD grammar from GitHub and install it."
+    (interactive)
+    (treesit-install-language-grammar 'pod))
+
+  (defun my/refresh-parsers ()
+    "Evaluate the buffer containing `perl-ts-mode', then re-apply both
+  `perl-ts-mode' and `treesit-explore-mode' to the current buffer."
+    (interactive)
+    (makunbound 'perl-ts--font-lock-settings) ;; to make a new defvar effective
+    (makunbound 'perl-ts--highlight-keyword-list)
+    (makunbound 'perl-ts--highlight-keyword-phaser-list)
+    (makunbound 'perl-ts--highlight-operator-list)
+    (makunbound 'perl-ts--pod-keyword-list)
+    (makunbound 'perl-ts--font-lock-settings)
+    (makunbound 'perl-ts--pod-font-lock-settings)
+    (makunbound 'perl-ts--font-lock-feature-list)
+    (eval-buffer "perl-ts-mode.el")
+    (perl-ts-mode)
+    (treesit-explore-mode 1))
 #+END_SRC
 
