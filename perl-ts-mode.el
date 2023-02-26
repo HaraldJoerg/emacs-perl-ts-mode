@@ -6,6 +6,7 @@
 ;; Created: February 2022
 ;; Keywords: languages perl tree-sitter
 ;; Version: 0.2
+;; Package-Requires: ((emacs "29.1"))
 
 ;; This file is not part of GNU Emacs.
 
@@ -34,6 +35,7 @@
 ;; co-exist with the other modes for editing Perl files.
 
 (require 'treesit)
+(require 'cperl-mode)
 
 (defgroup perl-ts nil
   "Major mode for editing Perl code, based on tree-sitter."
@@ -183,17 +185,17 @@ at runtime.")
    :override nil
    `(([,@perl-ts--highlight-operator-list])
      @cperl-nonoverridable-face)
-   ;; Variables
+   ;; Variables Scalars are a rule of their own so that their
+   ;; formatting is kept in @$arrayref
    :language 'perl
    :feature 'variable-name
    :override 'keep
-   '((scalar) @font-lock-variable-name-face
-     (arraylen) @font-lock-variable-name-face
-     )
+   '((scalar) @font-lock-variable-name-face)
    :language 'perl
    :feature 'variable-name
    :override 'keep
-   '((array) @cperl-array-face
+   '((arraylen) @font-lock-variable-name-face
+     (array) @cperl-array-face
      (array_deref_expression (["->" "@" "*"]) @cperl-array-face)
      (array_element_expression array: (_)
 			       @cperl-array-face)

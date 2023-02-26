@@ -17,6 +17,16 @@ to compile the dynamic libraries:
  - The info node: [[info:elisp#Parsing Program Source][elisp#Parsing Program Source]],
  - in particular [[info:elisp#Tree-sitter Major Modes][Developing major modes with tree-sitter]]
 
+** Translating the sources
+
+Found in the history:
+#+BEGIN_SRC sh
+  cd $TREE_SITTER_PERL_ROOT
+  cd src
+  gcc -shared -Wl,-soname,libtree-sitter-perl.so.1 \
+      -o libtree-sitter-perl.so.0.0.1 parser.o scanner.o -lc
+#+END_SRC
+
 * Developer hacks
 
 This is not to go into any public release: These are tools and notes I
