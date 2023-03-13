@@ -1,0 +1,47 @@
+#+TITLE: A Major Mode for Perl using tree-sitter
+#+SUBTITLE: Just Playing
+#+AUTHOR: Harald Jörg
+#+EMAIL: <haj@posteo.de>
+
+* Motivation
+
+This repository is an experiment to bring four things together.
+
+ - [[https://www.gnu.org/software/emacs/][Emacs]] is an extensible, customizable, free/libre text editor — and more.
+ - [[https://www.perl.org/][Perl]] is a highly capable, feature-rich programming language with
+   over 30 years of development.
+ - [[https://tree-sitter.github.io/tree-sitter/][Tree-sitter]] is a parser generator tool and an incremental parsing library.
+ - [[https://github.com/tree-sitter-perl/tree-sitter-perl][tree-sitter-perl]] is a new approach to a Perl parser, written for
+   the tree-sitter library.
+
+I am an Emacs user, and I love programming in Perl.  In its next
+version, Emacs can be built with support for tree-sitter, and will
+provide support for several languages which use that, but not for
+Perl.  Emacs already has good support for the Perl programming
+language out of the box, but there are rough edges.  The Perl syntax
+is ... special, and parsing Perl with regular expressions is somewhere
+between difficult and impossible.  [[https://www.emacswiki.org/emacs/CPerlMode][CPerl mode]] has been honed for
+decades, but there are still valid Perl constructs which it can not
+understand.
+
+I don't know whether - and when - a parser based on tree-sitter will
+provide a better understanding of Perl syntax than CPerl mode.
+
+There's only one way to find out.
+
+* About...
+
+This repository provides a major mode for Emacs for editing Perl
+sources, based on tree-sitter.
+
+Emacs comes with two major modes for editing Perl, Perl mode and CPerl
+mode.  The mode we have here in perl-ts-mode.el is intentionally _not_
+based on either of them.  Therefore, don't expect the features of this
+mode to be comparable with the established modes for quite some time.
+The Perl grammar in tree-sitter-perl is far from complete.  However, I
+think it has the potential to eventually surpass the regexp-based Perl
+parsers written in Emacs lisp, and I'd like to be prepared for that.
+
+Expect slow progress.  Also, I haven't checked whether someone else is
+working on tree-sitter based Perl support in Emacs outside of the
+Emacs repositories itself (which I am watching).
