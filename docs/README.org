@@ -3,6 +3,23 @@
 #+AUTHOR: Harald Jörg
 #+EMAIL: <haj@posteo.de>
 
+* Status in 2025
+
+I have not worked on this repository for two years now, and even
+forgot that I had pushed it to GitHub.  This is a bit of a shame
+because the
+[[https://github.com/tree-sitter-perl/tree-sitter-perl][tree-sitter-perl]]
+repository is under active development.  So, I am happy to find that
+Pransu Sharma is now actively pursuing the topic in his
+[[https://hg.sr.ht/~pranshu/perl-ts-mode][perl-ts-mode]] repository
+over at sourcehut. (see Issue #1).
+
+My repository here did not receive any feedback, and I don't think I
+will have much time left to work on this.  Therefore I recommend to
+check out Pransu's work - and will archive this repository.
+
+Thanks for listening, and thanks to Pranshu!
+
 * Motivation
 
 This repository is an experiment to bring four things together.
